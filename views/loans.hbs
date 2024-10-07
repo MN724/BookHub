@@ -1,0 +1,238 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <title>Loans Management</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+  </head>
+
+  <body>
+    <h1>Loans</h1>
+    [
+    <a href='/'>Home</a>
+    |
+    <a href='/members'>Members</a>
+    |
+    <a href='/books'>Books</a>
+    |
+    <a href='/loans'>Loans</a>
+    |
+    <a href='/staff'>Staff</a>
+    ]
+    <!-- Separate Display for Loans Table -->
+
+    <div id='loansDisplay'>
+      <p><strong>Browse Loans</strong></p>
+      <table border='1' cellpadding='5'>
+        <thead>
+          <tr>
+            <th>Loan ID</th>
+            <th>Member Name</th>
+            <th>Staff Name</th>
+            <th>Loan Date</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          {{#each loans}}
+            <tr>
+              <td>{{this.loanID}}</td>
+              <td>{{this.memberName}}</td>
+              <td>{{this.staffName}}</td>
+              <td>{{this.loanDate}}</td>
+
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <!-- Separate Display for LineItems Table -->
+    <div id='lineItemsDisplay'>
+      <p><strong>Browse Line Items</strong></p>
+      <table border='1' cellpadding='5'>
+        <thead>
+          <tr>
+            <th>Line Item ID</th>
+            <th>Loan ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Due Date</th>
+            <th>Return Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each lineItems}}
+            <tr>
+              <td>{{this.lineitemID}}</td>
+              <td>{{this.loanID}}</td>
+              <td>{{this.title}}</td>
+              <td>{{this.author}}</td>
+              <td>{{this.isbn}}</td>
+              <td>{{this.dueDate}}</td>
+              <td>{{this.returnDate}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <br />
+    <div id='insert'>
+      <!-- Add Loan Form -->
+      <form id='addLoan' method='POST' action='/addLoan'>
+        <legend><strong>Add Loan with a Book</strong></legend>
+        <fieldset class='fields'>
+          <label for='memberID'>Member</label>
+          <select name='memberID' id='memberID'>
+            <option value='test'></option>
+            {{#each members}}
+              <option value='{{this.memberID}}'>{{this.memberName}}</option>
+            {{/each}}
+          </select>
+
+          <label for='staffID'>Staff</label>
+          <select name='staffID' id='staffID'>
+            <option value='test'></option>
+            {{#each staff}}
+              <option value='{{this.staffID}}'>{{this.staffName}}</option>
+            {{/each}}
+          </select>
+
+          <label>Loan Date</label>
+          <input type='date' name='loanDate' required />
+
+          <fieldset class='fields'>
+            <legend><strong>Book Details</strong></legend>
+
+            <label for='bookID'>Book</label>
+            <select name='bookID' id='bookID'>
+              <option value='test'></option>
+              {{#each books}}
+                <option value='{{this.bookID}}'>{{this.title}}
+                  by
+                  {{this.author}}</option>
+              {{/each}}
+            </select>
+
+            <label>Due Date</label>
+            <input type='date' name='dueDate' required />
+            <!-- Associated due date -->
+          </fieldset>
+        </fieldset>
+
+        <input class='btn' type='submit' value='Submit Loan and Book' />
+      </form>
+    </div>
+    <br />
+    <div id='addBookToLoan'>
+      <!-- Add Book to Existing Loan Form -->
+      <form method='POST' action='/addBookToLoan'>
+        <legend><strong>Add Book to Existing Loan</strong></legend>
+        <fieldset class='fields'>
+          <label for='loanID'>Loan ID</label>
+          <select name='loanID' id='loanID'>
+            <option value='test'></option>
+            {{#each loans}}
+              <option value='{{this.loanID}}'>{{this.loanID}}</option>
+            {{/each}}
+          </select>
+
+          <label for='bookID'>Book</label>
+          <select name='bookID' id='bookID'>
+            <option value='test'></option>
+            {{#each books}}
+              <option value='{{this.bookID}}'>{{this.title}}
+                by
+                {{this.author}}</option>
+            {{/each}}
+          </select>
+
+          <label for='dueDate'>Due Date:</label>
+          <input type='date' id='dueDate' name='dueDate' required />
+        </fieldset>
+        <input class='btn' type='submit' value='Add Book to Loan' />
+      </form>
+    </div>
+    <br />
+
+    <div id='update'>
+      <form id='updateLoan' method='POST' action='/updateLoan'>
+        <legend><strong>Update Loan</strong></legend>
+        <fieldset class='fields'>
+
+          <label for='loanID'>Loan ID</label>
+          <select name='loanID' id='loanID'>
+            <option value='test'></option>
+            {{#each loans}}
+              <option value='{{this.loanID}}'>{{this.loanID}}</option>
+            {{/each}}
+          </select>
+
+          <label for='memberID'>Member</label>
+          <select name='memberID' id='memberID'>
+            <option value='test'></option>
+            {{#each members}}
+              <option value='{{this.memberID}}'>{{this.memberName}}</option>
+            {{/each}}
+          </select>
+
+          <label for='staffID'>Staff</label>
+          <select name='staffID' id='staffID'>
+            <option value='test'></option>
+            {{#each staff}}
+              <option value='{{this.staffID}}'>{{this.staffName}}</option>
+            {{/each}}
+          </select>
+
+          <br />
+          <label>New Loan Date</label>
+          <input type='date' name='newLoanDate' />
+
+          <label>New Due Date</label>
+          <input type='date' name='newDueDate' />
+
+        </fieldset>
+
+        <input class='btn' type='submit' value='Update Loan' />
+
+      </form>
+    </div>
+    <br />
+    <div id='deleteLoan' style='display: block'>
+      <!-- Delete Loan Form -->
+      <form method='POST' action='/deleteLoan'>
+        <legend><strong>Delete Loan</strong></legend>
+        <fieldset class='fields'>
+          <label for='loanID'>Loan ID:</label>
+          <input
+            type='number'
+            name='loanID'
+            id='loanID'
+            placeholder='Enter Loan ID'
+          />
+        </fieldset>
+        <input class='btn' type='submit' value='Delete Loan' />
+      </form>
+    </div>
+    <br />
+    <div id='deleteLineItem' style='display: block'>
+      <!-- Delete Line Item Form -->
+      <form method='POST' action='/deleteLineItem'>
+        <legend><strong>Delete Line Item</strong></legend>
+        <fieldset class='fields'>
+          <label for='lineItemID'>Line Item ID:</label>
+          <input
+            type='number'
+            name='lineItemID'
+            id='lineItemID'
+            placeholder='Enter Line Item ID'
+          />
+        </fieldset>
+        <input class='btn' type='submit' value='Delete Line Item' />
+      </form>
+    </div>
+
+  </body>
+
+</html>

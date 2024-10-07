@@ -1,0 +1,109 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <title>Line Items Management</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+  </head>
+
+  <body>
+    <h1>Line Items</h1>
+    [
+    <a href='/'>Home</a>
+    |
+    <a href='/members'>Members</a>
+    |
+    <a href='/books'>Books</a>
+    |
+    <a href='/loans'>Loans</a>
+    |
+    <a href='/staff'>Staff</a>
+    |
+    <a href='/lineitems'>Line Items</a>
+    ]
+    <div id='browse'>
+      <p><strong>Browse Line Items</strong></p>
+      <table border='1' cellpadding='5'>
+        <tr>
+          <th>Line Item ID</th>
+          <th>Loan ID</th>
+          <th>Book ID</th>
+          <th>Due Date</th>
+          <th>Return Date</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>2</td>
+          <td>2</td>
+          <td>2024-01-24</td>
+          <td>NULL</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>3</td>
+          <td>1</td>
+          <td>2024-01-26</td>
+          <td>NULL</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>1</td>
+          <td>3</td>
+          <td>2024-02-29</td>
+          <td>NULL</td>
+        </tr>
+        <!-- Example line item rows will go here -->
+      </table>
+    </div>
+    <!-- browse -->
+    <div id='insert'>
+      <form id='addLineItem'>
+        <legend><strong>Add Line Item</strong></legend>
+        <fieldset class='fields'>
+          <label>Loan ID</label>
+          <input type='number' name='loanID' />
+          <label>Book ID</label>
+          <input type='number' name='bookID' />
+          <label>Due Date</label>
+          <input type='date' name='dueDate' />
+          <label>Return Date</label>
+          <input type='date' name='returnDate' />
+        </fieldset>
+        <input class='btn' type='submit' value='Add Line Item' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+    </div><!-- insert -->
+    <div id='update'>
+      <form id='updateLineItem'>
+        <legend><strong>Update Line Item</strong></legend>
+        <fieldset class='fields'>
+          <label>Line Item ID</label>
+          <input type='number' name='lineitemID' readonly />
+          <label>Loan ID</label>
+          <input type='number' name='loanID' />
+          <label>Book ID</label>
+          <input type='number' name='bookID' />
+          <label>Due Date</label>
+          <input type='date' name='dueDate' />
+          <label>Return Date</label>
+          <input type='date' name='returnDate' />
+        </fieldset>
+        <input class='btn' type='submit' value='Update Line Item' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+    </div><!-- update -->
+    <div id='delete'>
+      <form id='deleteLineItem'>
+        <legend><strong>Delete Line Item</strong></legend>
+        <fieldset class='fields'>
+
+          <label>Line Item ID</label>
+          <input type='number' name='lineitemID' readonly />
+        </fieldset>
+        <input class='btn' type='submit' value='Delete Line Item' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+    </div><!-- delete -->
+  </body>
+
+</html>

@@ -1,0 +1,108 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <title>Book Management</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+  </head>
+
+  <body>
+    <h1>Books</h1>
+    [
+    <a href='/'>Home</a>
+    |
+    <a href='/members'>Members</a>
+    |
+    <a href='/books'>Books</a>
+    |
+    <a href='/loans'>Loans</a>
+    |
+    <a href='/staff'>Staff</a>
+    ]
+
+    <div id='browse'>
+      <p><strong>Browse Books</strong></p>
+      <table id='books-table' border='1' cellpadding='5'>
+        <thead>
+          <tr>
+            <th>Book ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Genre</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each books}}
+            <tr data-value={{this.bookID}}>
+              <td>{{this.bookID}}</td>
+              <td>{{this.title}}</td>
+              <td>{{this.author}}</td>
+              <td>{{this.isbn}}</td>
+              <td>{{this.genre}}</td>
+              <td><button
+                  onclick='deleteBook({{this.bookID}})'
+                >Delete</button></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <script src='./js/delete_book.js'></script>
+    </div>
+    <!-- browse -->
+    <br />
+    <div id='insert'>
+      <form id='add-book-form-ajax'>
+        <legend><strong>Add Book</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-title'>Title</label>
+          <input type='text' name='input-title' id='input-title' />
+
+          <label for='input-author'>Author</label>
+          <input type='text' name='input-author' id='input-author' />
+
+          <label for='input-isbn'>ISBN</label>
+          <input type='text' name='input-isbn' id='input-isbn' />
+
+          <label for='input-genre'>Genre</label>
+          <input type='text' name='input-genre' id='input-genre' />
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/add_book.js'></script>
+    </div><!-- insert -->
+    <br />
+    <div id='update'>
+      <form id='update-book-form-ajax'>
+        <legend><strong>Update Book</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-bookID'>ID</label>
+          <select name='bookID' id='idSelect'>
+            <option value='test'></option>
+            {{#each books}}
+              <option value='{{this.bookID}}'>{{this.bookID}}</option>
+            {{/each}}
+          </select>
+
+          <label for='input-title'>Name</label>
+          <input type='text' name='title' id='input-title-update' />
+
+          <label for='input-author'>Author</label>
+          <input type='text' name='author' id='input-author-update' />
+
+          <label for='input-isbn'>ISBN</label>
+          <input type='text' name='isbn' id='input-isbn-update' />
+
+          <label for='input-genre'>Genre</label>
+          <input type='text' name='genre' id='input-genre-update' />
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/update_book.js'></script>
+    </div><!-- update -->
+  </body>
+
+</html>

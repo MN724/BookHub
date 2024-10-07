@@ -1,0 +1,122 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <title>Members Management</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+  </head>
+
+  <body>
+    <h1>Members</h1>
+    [
+    <a href='/'>Home</a>
+    |
+    <a href='/members'>Members</a>
+    |
+    <a href='/books'>Books</a>
+    |
+    <a href='/loans'>Loans</a>
+    |
+    <a href='/staff'>Staff</a>
+    ]
+
+    <div id='browse'>
+      <p><strong>Browse Members</strong></p>
+      <table id='members-table' border='1' cellpadding='5'>
+        <thead>
+          <tr>
+            <th>Member ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Join Date</th>
+            <th>Membership Tier</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each members}}
+            <tr data-value={{this.memberID}}>
+              <td>{{this.memberID}}</td>
+              <td>{{this.memberName}}</td>
+              <td>{{this.memberEmail}}</td>
+              <td>{{this.joinDate}}</td>
+              <td>{{this.membershipTier}}</td>
+              <td><button
+                  onclick='deleteMember({{this.memberID}})'
+                >Delete</button></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <script src='./js/delete_member.js'></script>
+    </div>
+    <!-- browse -->
+    <br />
+    <div id='insert'>
+      <form id='add-member-form-ajax'>
+        <legend><strong>Add Member</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-memberName'>Name</label>
+          <input type='text' name='input-memberName' id='input-memberName' />
+
+          <label for='input-memberEmail'>Email</label>
+          <input type='email' name='input-memberEmail' id='input-memberEmail' />
+
+          <label for='input-joinDate'>Join Date</label>
+          <input type='date' name='input-joinDate' id='input-joinDate' />
+
+          <label for='input-membershipTier'>Membership Tier</label>
+          <select name='input-membershipTier' id='input-membershipTier'>
+            <option value='' selected></option>
+            <option value='Gold'>Gold</option>
+            <option value='Silver'>Silver</option>
+            <option value='Bronze'>Bronze</option>
+          </select>
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/add_member.js'></script>
+    </div><!-- insert -->
+    <br />
+    <div id='update'>
+      <form id='update-member-form-ajax'>
+        <legend><strong>Update Member</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-memberID'>ID</label>
+          <select name='memberID' id='idSelect'>
+            <option value='test'></option>
+            {{#each members}}
+              <option value='{{this.memberID}}'>{{this.memberID}}</option>
+            {{/each}}
+          </select>
+
+          <label for='input-memberName'>Name</label>
+          <input type='text' name='memberName' id='input-memberName-update' />
+
+          <label for='input-memberEmail'>Email</label>
+          <input
+            type='email'
+            name='memberEmail'
+            id='input-memberEmail-update'
+          />
+
+          <label for='input-joinDate'>Join Date</label>
+          <input type='date' name='joinDate' id='input-joinDate-update' />
+
+          <label for='input-membershipTier'>Membership Tier</label>
+          <select name='membershipTier' id='input-membershipTier-update'>
+            <option value='' selected></option>
+            <option value='Gold'>Gold</option>
+            <option value='Silver'>Silver</option>
+            <option value='Bronze'>Bronze</option>
+          </select>
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/update_member.js'></script>
+    </div><!-- update -->
+
+  </body>
+</html>

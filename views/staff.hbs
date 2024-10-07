@@ -1,0 +1,100 @@
+<html lang='en'>
+
+  <head>
+    <meta charset='UTF-8' />
+    <title>Staff Management</title>
+    <link href='style.css' rel='stylesheet' type='text/css' />
+  </head>
+
+  <body>
+    <h1>Staff</h1>
+    [
+    <a href='/'>Home</a>
+    |
+    <a href='/members'>Members</a>
+    |
+    <a href='/books'>Books</a>
+    |
+    <a href='/loans'>Loans</a>
+    |
+    <a href='/staff'>Staff</a>
+    ]
+
+    <div id='browse'>
+      <p><strong>Browse Staff</strong></p>
+      <table id='staff-table' border='1' cellpadding='5'>
+        <thead>
+          <tr>
+            <th>Staff ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each staff}}
+            <tr data-value={{this.staffID}}>
+              <td>{{this.staffID}}</td>
+              <td>{{this.staffName}}</td>
+              <td>{{this.position}}</td>
+              <td>{{this.staffEmail}}</td>
+              <td><button
+                  onclick='deleteStaff({{this.staffID}})'
+                >Delete</button></td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <script src='./js/delete_staff.js'></script>
+    </div>
+    <!-- browse -->
+    <br />
+    <div id='insert'>
+      <form id='add-staff-form-ajax'>
+        <legend><strong>Add Staff</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-staffName'>Name</label>
+          <input type='text' name='input-staffName' id='input-staffName' />
+
+          <label for='input-position'>Position</label>
+          <input type='text' name='input-position' id='input-position' />
+
+          <label for='input-staffEmail'>Email</label>
+          <input type='email' name='input-staffEmail' id='input-staffEmail' />
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/add_staff.js'></script>
+    </div><!-- insert -->
+    <br />
+    <div id='update'>
+      <form id='update-staff-form-ajax'>
+        <legend><strong>Update Staff</strong></legend>
+        <fieldset class='fields'>
+          <label for='input-staffID'>ID</label>
+          <select name='staffID' id='idSelect'>
+            <option value='test'></option>
+            {{#each staff}}
+              <option value='{{this.staffID}}'>{{this.staffID}}</option>
+            {{/each}}
+          </select>
+
+          <label for='input-staffName'>Name</label>
+          <input type='text' name='staffName' id='input-staffName-update' />
+
+          <label for='input-position'>Position</label>
+          <input type='text' name='position' id='input-position-update' />
+
+          <label for='input-staffEmail'>Email</label>
+          <input type='email' name='staffEmail' id='input-staffEmail-update' />
+        </fieldset>
+        <input type='submit' />
+        <input class='btn' type='button' value='Cancel' />
+      </form>
+      <script src='./js/update_staff.js'></script>
+    </div><!-- update -->
+  </body>
+
+</html>
